@@ -49,7 +49,7 @@ export class SearchResultsComponent implements AfterViewInit {
     }
 
     onSearch() {
-        if (this.searchTerm.length >= 3) {
+        if (this.searchTerm.length >= 2) {
             const types = Object.entries(this.filters)
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 .filter(([_, enabled]) => enabled)

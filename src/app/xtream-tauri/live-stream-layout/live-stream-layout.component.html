@@ -11,10 +11,26 @@
             <h2>Categories</h2>
         }
     </div>
+
     @if (selectedCategoryId()) {
-        <app-portal-channels-list (playClicked)="playLive($event)" />
+        <app-portal-channels-list
+            (playClicked)="playLive($event)" />
     } @else {
-        <app-category-view (categoryClicked)="selectCategory($event)" />
+        <div style="padding: 10px">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" style="width: 100%">
+                <mat-label>Search</mat-label>
+                <input
+                    matInput
+                    type="search"
+                    [(ngModel)]="searchQuery"
+                    placeholder="Search categories"
+                />
+            </mat-form-field>
+        </div>
+
+        <app-category-view
+            [(searchQuery)]="searchQuery"
+            (categoryClicked)="selectCategory($event)" />
     }
 </div>
 <div class="content-container">

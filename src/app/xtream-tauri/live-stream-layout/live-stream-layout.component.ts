@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     inject,
-    OnInit,
+    OnInit, signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
@@ -57,6 +57,8 @@ export class LiveStreamLayoutComponent implements OnInit {
     player = this.settingsStore.player;
     streamUrl: string;
     favorites = new Map<number, boolean>();
+
+    readonly searchQuery = signal<string>('');
 
     ngOnInit() {
         const playlist = this.xtreamStore.currentPlaylist();

@@ -2,7 +2,20 @@
     <div class="sidebar-header">
         <h2>Categories</h2>
     </div>
-    <app-category-view (categoryClicked)="categoryClicked($event)" />
+    <div style="padding: 10px">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" style="width: 100%">
+            <mat-label>Search</mat-label>
+            <input
+                matInput
+                type="search"
+                [(ngModel)]="searchQuery"
+                placeholder="Search categories"
+            />
+        </mat-form-field>
+    </div>
+    <app-category-view
+        [searchQuery]="searchQuery()"
+        (categoryClicked)="categoryClicked($event)" />
 </div>
 
 <div class="main-content">

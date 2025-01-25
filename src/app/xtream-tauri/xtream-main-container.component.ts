@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CategoryViewComponent } from './category-view/category-view.component';
 
@@ -9,6 +9,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { XtreamCategory } from '../../../shared/xtream-category.interface';
 import { MpvPlayerBarComponent } from '../shared/components/mpv-player-bar/mpv-player-bar.component';
 import { XtreamStore } from './xtream.store';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-xtream-main-container',
@@ -22,10 +25,16 @@ import { XtreamStore } from './xtream.store';
         MpvPlayerBarComponent,
         MatIcon,
         MatIconButton,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        FormsModule,
     ],
 })
 export class XtreamMainContainerComponent {
     readonly xtreamStore = inject(XtreamStore);
+
+    readonly searchQuery = signal('');
 
     private store = inject(Store);
 

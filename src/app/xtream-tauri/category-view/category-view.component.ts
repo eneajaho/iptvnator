@@ -3,7 +3,7 @@ import {
     Component,
     EventEmitter,
     Output,
-    inject,
+    inject, input, computed, model,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -30,6 +30,18 @@ import { XtreamStore } from '../xtream.store';
 })
 export class CategoryViewComponent {
     @Output() categoryClicked = new EventEmitter<XtreamCategory>();
+
+    readonly searchQuery = model('');
+
+    readonly filteredCategories = computed(() => {
+        const categories = this.xtreamStore.getCategoriesBySelectedType();
+
+        if (!this.searchQuery()) return categories.sort((a, b) => (a.category_name || a.name).localeCompare(b.category_name || b.name));
+
+        return  categories.filter(
+            c => (c.category_name || c.name)?.toLowerCase().includes(this.searchQuery().toLowerCase())
+        ).sort((a, b) => (a.category_name || a.name).localeCompare(b.category_name || b.name));
+    });
 
     readonly xtreamStore = inject(XtreamStore);
     private readonly route = inject(ActivatedRoute);
